@@ -1,10 +1,46 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Button from "../Components/Button";
-
 import { arrowRight } from "../assets/icons";
 import { shoes, statistics } from "../constants";
 import { bigShoe1 } from "../assets/images";
 import ShoeCard from "../Components/ShoeCard";
+
+const textVariants = {
+  initial: {
+    y: -500,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      straggerChildrean: 0.1,
+    },
+  },
+  scrollButton: {
+    opacity: 0,
+    x: 10,
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+    },
+  },
+};
+const sliderVariants = {
+  initial: {
+    x: 0,
+  },
+  animate: {
+    x: "-220%",
+    transition: {
+      repeat: Infinity,
+      repeatType: "mirror",
+      duration: 20,
+    },
+  },
+};
 
 const Hero = () => {
   const [bigShoeImg, setBigShoeImg] = useState(bigShoe1);
@@ -13,7 +49,13 @@ const Hero = () => {
       id="home"
       className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container"
     >
-      <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full max-xl:padding-x pt-28">
+      <motion.div
+        variants={textVariants}
+        initial="initial"
+        animate="animate"
+        className="relative xl:w-2/5 flex flex-col justify-center 
+      items-start w-full max-xl:padding-x pt-28"
+      >
         <p className="text-xl font-montserrat text-coral-red">
           Our Summer Collection
         </p>
@@ -40,7 +82,7 @@ const Hero = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <div className="relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-primary bg-hero bg-cover bg-center">
         <img
